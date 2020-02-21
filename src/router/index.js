@@ -4,6 +4,7 @@ import Home from "@/views/Home.vue";
 import Login from "@/views/Login.vue";
 import SetupVue from "@/views/SetupVue.vue";
 import SampleForm from "@/views/SampleForm.vue";
+import NewForm from "@/views/NewForm.vue";
 
 Vue.use(VueRouter);
 
@@ -28,6 +29,12 @@ const routes = [
     name: "SampleForm",
 
     component: SampleForm
+  },
+  {
+    path: "/newform",
+    name: "NewForm",
+
+    component: NewForm
   }
 ];
 

@@ -1,21 +1,26 @@
 <template>
   <v-app>
+    <!-- create navigation bar -->
     <v-app-bar app color="#7B1FA2" dark>
-      <v-toolbar-title>GradTracker Pro</v-toolbar-title>
+      <v-toolbar-title>Grad Tracker Pro</v-toolbar-title>
       <v-spacer></v-spacer>
+      <!-- loops through data to produce buttons -->
       <v-btn
         v-for="link in links"
-        :key="`${link.label}-header-link`"
+        v-bind:key="`${link.label}-header-link`"
         text
         rounded
-        :to="link.url"
+        v-bind:to="link.url"
       >
         {{ link.label }}
       </v-btn>
     </v-app-bar>
+
     <v-content>
+      <!-- loads all pages in routes -->
       <router-view></router-view>
     </v-content>
+    <!-- create page footer -->
     <v-footer color="#7B1FA2" padless>
       <v-layout justify-center wrap>
         <v-flex purple darken-2 py-4 text-center white--text>
