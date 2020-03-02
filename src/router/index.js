@@ -1,10 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "@/views/Home.vue";
-import Login from "@/views/Login.vue";
-import SetupVue from "@/views/SetupVue.vue";
-import SampleForm from "@/views/SampleForm.vue";
-import NewForm from "@/views/NewForm.vue";
+import AddStudent from "@/views/AddStudent.vue";
+//import Submit from "@/views/Submit.vue";
 
 Vue.use(VueRouter);
 
@@ -15,27 +13,12 @@ const routes = [
     component: Home
   },
   {
-    path: "/login",
-    name: "Login",
-    component: Login
-  },
-  {
-    path: "/setupvue",
-    name: "SetupVue",
-    component: SetupVue
-  },
-  {
-    path: "/sampleform",
-    name: "SampleForm",
+    path: "/AddStudent",
+    name: "AddStudent",
 
-    component: SampleForm
-  },
-  {
-    path: "/newform",
-    name: "NewForm",
-
-    component: NewForm
+    component: AddStudent
   }
+  
 ];
 
 const router = new VueRouter({

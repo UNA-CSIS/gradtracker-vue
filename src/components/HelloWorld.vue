@@ -1,26 +1,25 @@
-<template>
-  <v-container>
-    <v-row class="text-center">
-      <v-col cols="12">
-        <v-img
-          :src="require('../assets/logo.svg')"
-          class="my-3"
-          contain
-          height="200"
-        />
-      </v-col>
+<template>  
+    <v-container> <!-- provides the ability to center and horizontally pad your site's contents. -->
+      <v-row class="text-center">   <!--Centers text on screen --> 
+        <v-col cols="12">
 
-      <v-col class="mb-4">
-        <h1 class="display-2 font-weight-bold mb-3">
-          Welcome to GradTracker Pro
-        </h1>
+          <!-- Below is the code used to add UNA image into Home page -->
+              <v-img          
+                :src="require('../assets/UNALogo.png')"
+                class="my-4"
+                contain      
+                height="200"
+              />
+            </v-col>
 
-        <p class="subheading font-weight-regular">
-          For all your graduate tracking needs
-        </p>
-      </v-col>
-    </v-row>
-  </v-container>
+            <v-col class="mb-4">
+              <h1 class="display-1 font-weight-bold mb-3">      <!--makes the text below bold -->
+                Welcome to the GradTracker 
+              </h1>
+    
+        </v-col>
+      </v-row>
+    </v-container>  
 </template>
 
 <script>
