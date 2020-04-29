@@ -1,4 +1,62 @@
 <template>
+
+  <v-container>
+    <!-- provides the ability to center and horizontally pad your site's contents. -->
+    <v-row class="text-center">
+      <!--Centers text on screen -->
+      <v-col cols="12">
+        <!-- Below is the code used to add UNA image into Home page -->
+        <!--   <v-img          
+                :src="require('../assets/UNALogo.png')"
+                class="my-4"
+                contain      
+                height="200"
+        />-->
+      </v-col>
+
+      <template>
+        <v-row>
+          <v-col cols="12">
+            <v-card>
+              <v-col class="mb-4">
+                <h1 class="display-2 font-weight-bold mb-3">
+                  <!--makes the text below bold -->
+                  Welcome to the GradTracker
+                </h1>
+                <v-img :src="require('../assets/UNALogo.png')" class="my-4" contain height="200" />
+              </v-col>
+              <v-card-title>
+                Student Search
+                <v-spacer></v-spacer>
+                <v-text-field
+                  v-model="search"
+                  append-icon="mdi-magnify"
+                  label="Search"
+                  single-line
+                  hide-details
+                ></v-text-field>
+              </v-card-title>
+              <v-data-table
+                :headers="headers"
+                :items="students"
+                :items-per-page="5"
+                :search="search"
+                class="elevation-1"
+              >
+                <template v-slot:item.actions="{ item }">
+                  <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
+                  <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
+                </template>
+              </v-data-table>
+            </v-card>
+          </v-col>
+        </v-row>
+      </template>
+    </v-row>
+  </v-container>
+</template>
+
+
   <v-data-table
     :headers="headers"
     :items="students"
@@ -91,14 +149,11 @@
   </v-data-table>
 </template>
 
-
-
-
 <script>
 export default {
   data() {
     return {
-      search: '',
+
       headers: [
         {
           text: "Name",
@@ -133,19 +188,19 @@ export default {
       }
     };
   },
+
   computed: {
     formTitle() {
       return this.editedIndex === -1 ? "New Item" : "Edit Item";
     }
   },
+
   watch: {
     dialog(val) {
       val || this.close();
     }
   },
-  created() {
-    this.initialize();
-  },
+
   methods: {
     initialize() {
       this.students = [
@@ -220,11 +275,13 @@ export default {
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
+
     deleteItem(item) {
       const index = this.students.indexOf(item);
       confirm("Are you sure you want to delete this item?") &&
         this.students.splice(index, 1);
     },
+
     close() {
       this.dialog = false;
       setTimeout(() => {
@@ -232,6 +289,7 @@ export default {
         this.editedIndex = -1;
       }, 300);
     },
+
     save() {
       if (this.editedIndex > -1) {
         Object.assign(this.students[this.editedIndex], this.editedItem);
@@ -242,4 +300,3 @@ export default {
     }
   }
 };
-</script>
