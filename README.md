@@ -22,3 +22,6 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## Adding Firebase to your prject
+See this link https://www.youtube.com/watch?v=WKgDxyfVFRI
