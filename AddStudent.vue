@@ -12,14 +12,13 @@
                 <center>Add Student</center>
               </h1>
               <v-form class="px-3" ref="form">
-
                 <!--Code below makes the input form for the users information -->
                 <!-- we also added a max length of the string that can be entered to all input text -->
                 <v-text-field
                   v-model="firstName"
                   :error-messages="nameErrors"
                   :counter="12"
-                  maxlength="12"    
+                  maxlength="12"
                   label="First Name"
                   input="firstName"
                   blur="firstName"
@@ -29,7 +28,7 @@
                   v-model="lastName"
                   :error-messages="nameErrors"
                   :counter="12"
-                  maxlength="12"       
+                  maxlength="12"
                   label="Last Name"
                   input="lastName"
                   blur="lastName"
@@ -47,8 +46,8 @@
 
                 <v-text-field v-model="major" label="Major" />
 
-              <!--rules makes sure the email end in "@name.com" -->
-                <v-text-field  :rules="rules" v-model="email" label="UNA Email" type="email" />
+                <!--rules makes sure the email end in "@name.com" -->
+                <v-text-field :rules="rules" v-model="email" label="UNA Email" type="email" />
                 <br />
                 <v-autocomplete
                   label="Expected Graduation Date?"
@@ -61,17 +60,13 @@
                 <v-text-field v-model="phone" label="Phone Number" />
 
                 <!-- The code below creates the radio buttons that appear on the screen for un/employement -->
-                <template>
-                  <div>
-                    <h3>Are You Currently Employed?</h3>
-                    <!-- currently having trouble binding the data from the radio buttons to the db. 
-                        would be something we worked on in the future -->
-                    <v-radio-group v-model="choice">
-                      <v-radio  label="Yes" color="yellow" :key="Yes" :value="Yes"></v-radio>
-                      <v-radio  label="No" color="yellow" :key="No" :value="No"></v-radio>
-                    </v-radio-group>
-                  </div>
-                </template>
+                <v-autocomplete
+                  label="Are you Employed?"
+                  :items="employed"
+                  v-model="employedChoice"
+                  outlined
+                  dense
+                ></v-autocomplete>
 
                 <v-text-field
                   v-model="employer"
@@ -219,13 +214,14 @@ import db from "@/fb2";
 export default {
   data: () => ({
     rules: [
-        value => !!value || 'Required.',
-        value => (value || '').length <= 20 || 'Max 20 characters',
-        value => {
-        const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-          return pattern.test(value) || 'Invalid e-mail.'
-        },
-      ],
+      value => !!value || "Required.",
+      value => (value || "").length <= 20 || "Max 20 characters",
+      value => {
+        const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return pattern.test(value) || "Invalid e-mail.";
+      }
+    ],
+    //variables to prevent errors
     firstName: "",
     lastName: "",
     studentID: "",
@@ -234,6 +230,7 @@ export default {
     phone: "",
     nameErrors: "",
     choice: 1,
+    employed: ["Yes", "No"],
     position: "",
     employer: "",
     dialog: false,
@@ -265,7 +262,7 @@ export default {
       "Planning to continue education but not yet enrolled",
       "Not seeking employment or continuing education at this time"
     ],
-  //  picked: ["Yes", "No"],
+    //  picked: ["Yes", "No"],
     date: null,
     menu: false
   }),
@@ -279,6 +276,7 @@ export default {
     save(date) {
       this.$refs.menu.save(date);
     },
+    //submit button with db function on submit
     submit() {
       if (this.$refs.form.validate()) {
         const student = {
@@ -288,6 +286,7 @@ export default {
           major: this.major,
           email: this.email,
           phone: this.phone,
+          employed: this.employedChoice,
           employer: this.employer,
           birthday: this.date,
           choice: this.choice,
@@ -305,4 +304,4 @@ export default {
     }
   }
 };
-</script>
+</script> 
